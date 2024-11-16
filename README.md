@@ -1,7 +1,7 @@
 # Distributed Database Prototype
 Gropup 2
 
-This project demonstrates a distributed database prototype inspired by YouTube's architecture using **MongoDB**, (**SQL database?**) and **Python**. The system includes three separate databases with sample data and provides tools for interaction and querying.
+This project demonstrates a distributed database prototype inspired by YouTube's architecture using **MongoDB**, (**SQL database?**) and **Python**. The system includes three separate databases with sample data and provides tools for interaction and querying. These could be sharded and replicated if needed.
 
 ---
 
