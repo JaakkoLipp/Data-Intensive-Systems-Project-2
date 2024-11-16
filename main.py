@@ -11,8 +11,10 @@
 
 from pymongo import MongoClient
 
-# Connect to MongoDB
-client = MongoClient("mongodb://localhost:27017/")
+def connect_to_mongodb():
+    # Connect to MongoDB
+    client = MongoClient("mongodb://localhost:27017/")
+    return client
 
 # Example: Functions to interact with databases
 def get_all_users():
@@ -36,6 +38,9 @@ def add_comment(video_id, user_id, comment_text):
 
 # Main Interaction
 if __name__ == "__main__":
+    # Connect to NoSQL MongoDB
+    client = connect_to_mongodb()
+
     # Example: Retrieve all users
     users = get_all_users()
     print("All Users:")
