@@ -8,6 +8,7 @@
 # 
 # 
 ##############################################
+import frontend
 
 from pymongo import MongoClient
 
@@ -42,10 +43,12 @@ if __name__ == "__main__":
     client = connect_to_mongodb()
 
     # Example: Retrieve all users
-    users = get_all_users()
-    print("All Users:")
-    for user in users:
-        print(user)
+    #users = get_all_users()
+    #print("All Users:")
+    #for user in users:
+    #    print(user)
+    # example of data from database to frontend.py
+    frontend.example_main_to_front(get_all_users())
 
     # Example: Retrieve videos by category
     category = "Category A"
