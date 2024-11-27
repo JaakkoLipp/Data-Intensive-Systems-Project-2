@@ -2,8 +2,8 @@
 # This file is used to INTERACT with setup databases
 # Run setup.py file if databases are empty
 # 
-# Three databases are created in NoSQL DBMS (MongoDB): 
-# UsersDatabase, VideosDatabase, CommentsDatabase
+# Six databases are created in NoSQL DBMS (MongoDB): 
+# UsersDatabase, VideosDatabase, CommentsDatabase, ChannelDatabase, NotificationDatabase, PlaylistDatabase
 # 
 # 
 # 
