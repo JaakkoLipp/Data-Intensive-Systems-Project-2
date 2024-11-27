@@ -30,6 +30,15 @@ def populate_databases_mongodb():
     3. CommentsDatabase:
         - Collection: Comments
         - Sample Data: 20 comments with fields 'comment_id', 'video_id', 'user_id', and 'comment'.
+    4. ChannelDatabase:
+        - Collection: Channels
+        - Sample Data: 20 channels with fields 'channel_id', 'channel_name', 'description', 'user_id', 'subscriber_count'.
+    5. NotificationsDatabase:
+        - Collection: Notifications
+        - Sample Data: 20 notifications with fields 'user_id', 'notification_id', 'text', 'date'.
+    6. PlaylistDatabase:
+        - Collection: Playlists
+        - Sample Data: 20 playlists with fields 'playlist_id', 'name', 'user_id', 'video_id', 'date_created'.
     Prints messages indicating the start and completion of the database population process.
     """
 
@@ -60,6 +69,31 @@ def populate_databases_mongodb():
         for i in range(1001, 1021)
     ]
     comments_db["Comments"].insert_many(comments_data)
+
+    # Database 4: Channels
+    channel_db = client["ChannelDatabase"]
+    channel_data = [
+        {"channel_id": i, "channel_name": f"Channel {i}", "description": f"describtion {i}", "user_id": 3, "subscriber_count": 4000 * i }
+        for i in range(1, 21)
+    ]
+    channel_db["Channels"].insert_many(channel_data)
+
+    # Database 5: Notifications
+    notification_db = client["NotificationDatabase"]
+    notification_data = [
+        {"user_id": 9, "notification_id": i, "text": f"Text {i}", "date": f"{3+1}.04.2024"}
+        for i in range(1, 21)
+    ]
+    notification_db["Notifications"].insert_many(notification_data)
+
+    # Database 6: Playlists
+    playlist_db = client["PlaylistDatabase"]
+    playlist_data = [
+        {"playlist_id": i, "Name": f"Name {i}", "user_id": 6, "video_id": f"{100+i}", "date_created": f"{5+1}.06.2021"}
+        for i in range(1, 21)
+    ]
+    playlist_db["Playlists"].insert_many(playlist_data)
+
 
     print("Databases populated with sample data.")
 
