@@ -8,55 +8,104 @@
 # 
 # 
 ##############################################
+
 import frontend
+
+# this could be implemented:
+#from setup import populate_databases
 
 from pymongo import MongoClient
 
-def connect_to_mongodb():
-    # Connect to MongoDB
+# Function to connect to MongoDB
+def get_database(region):
+    """
+    Connect to the specified regional database.
+    :param region: The name of the region (e.g., 'EU').
+    :return: The MongoDB database object.
+    """
     client = MongoClient("mongodb://localhost:27017/")
-    return client
+    return client[region]
 
-# Example: Functions to interact with databases
-def get_all_users():
-    users_db = client["UsersDatabase"]
-    return list(users_db["Users"].find({}))
+# Query 1: Find all users in a specific region
+def find_all_users(region):
+    db = get_database(region)
+    users = list(db["Users"].find())
+    return users
 
-def get_videos_by_category(category):
-    videos_db = client["VideosDatabase"]
-    return list(videos_db["Videos"].find({"category": category}))
+# Query 2: Find all videos in a specific region
+def find_all_videos(region):
+    db = get_database(region)
+    videos = list(db["Videos"].find())
+    return videos
 
-def add_comment(video_id, user_id, comment_text):
-    comments_db = client["CommentsDatabase"]
-    comment_id = comments_db["Comments"].estimated_document_count() + 1001
-    comments_db["Comments"].insert_one({
-        "comment_id": comment_id,
-        "video_id": video_id,
-        "user_id": user_id,
-        "comment": comment_text
-    })
-    return f"Comment added with ID {comment_id}"
+# Query 3: Add a video into a specific region
+def add_video(region, video_data):
+    db = get_database(region)
+    db["Videos"].insert_one(video_data)
+    print("Video added successfully.")
+
+# Query 4: Delete a video from a specific region
+def delete_video(region, video_id):
+    db = get_database(region)
+    result = db["Videos"].delete_one({"video_id": video_id})
+    if result.deleted_count > 0:
+        print("Video deleted successfully.")
+    else:
+        print("Video not found.")
+
+# Main Program
+def testui():
+    while True:
+        print("\n\n----- T E S T I N  U I -----\n\n")
+        print("Select a query to execute:")
+        print("1. Find all users in a specific region")
+        print("2. Find all videos in a specific region")
+        print("3. Add a video into a specific region")
+        print("4. Delete a video from a specific region")
+        print("5. Exit\n")
+        choice = input("Enter your choice (1/2/3/4/5): ")
+
+        if choice == "1":
+            region = input("Enter the region name (e.g., EU, NA, AS, SA, OCE): ")
+            users = find_all_users(region)
+            print("\nUsers in", region, ":")
+            for user in users:
+                print(user)
+
+        elif choice == "2":
+            region = input("Enter the region name (e.g., EU, NA, AS, SA, OCE): ")
+            videos = find_all_videos(region)
+            print("\nVideos in", region, ":")
+            for video in videos:
+                print(video)
+
+        elif choice == "3":
+            region = input("Enter the region name (e.g., EU, NA, AS, SA, OCE): ")
+            video_id = int(input("Enter video ID: "))
+            title = input("Enter video title: ")
+            category = input("Enter video category: ")
+            views = int(input("Enter number of views: "))
+            video_data = {
+                "video_id": video_id,
+                "title": title,
+                "category": category,
+                "views": views,
+            }
+            add_video(region, video_data)
+
+        elif choice == "4":
+            region = input("Enter the region name (e.g., EU, NA, AS, SA, OCE): ")
+            video_id = int(input("Enter the video ID to delete: "))
+            delete_video(region, video_id)
+
+        elif choice == "5":
+            print("Exiting...")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
 
 # Main Interaction
 if __name__ == "__main__":
-    # Connect to NoSQL MongoDB
-    client = connect_to_mongodb()
-
-    # Example: Retrieve all users
-    #users = get_all_users()
-    #print("All Users:")
-    #for user in users:
-    #    print(user)
-    # example of data from database to frontend.py
-    frontend.example_main_to_front(get_all_users())
-
-    # Example: Retrieve videos by category
-    category = "Category A"
-    videos = get_videos_by_category(category)
-    print(f"\nVideos in category '{category}':")
-    for video in videos:
-        print(video)
-
-    # Example: Add a new comment
-    new_comment = add_comment(video_id=101, user_id=1, comment_text="Great video!")
-    print(f"\n{new_comment}")
+    testui()
