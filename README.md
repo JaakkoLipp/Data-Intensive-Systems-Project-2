@@ -64,8 +64,8 @@ This prototype simulates the architecture of a distributed database system for a
 ### Steps to Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/distributed-db-prototype.git
-   cd distributed-db-prototype
+   git clone https://github.com/JaakkoLipp/Data-Intensive-Systems-Project-2
+   cd Data-Intensive-Systems-Project-2
    ```
 2. Run the setup script to populate the databases:
    ```bash
@@ -161,6 +161,25 @@ Output:
 ```plaintext
 Comment added with ID 1021
 ```
+
+#### Simple Queries (Single Database)
+The following queries operate on a specific regional database (e.g., EU, NA, SA, AS, OCE):
+
+- **Find all users in a specific region**: Retrieve all users stored in the Users collection of a regional database.
+- **Add a video to a specific region**: Insert a new video into the Videos collection of a regional database.
+- **Find the top N videos in a specific region**: Fetch the top N videos by views from the Videos collection of a regional database.
+- **Find all comments on a specific video in a specific region**: Retrieve all comments associated with a specific video from the Comments collection of a regional database.
+- **Add a comment to a specific video in a specific region**: Insert a new comment into the Comments collection of a regional database.
+
+#### Complex Queries (Across Multiple Databases)
+The following queries involve data aggregation or interaction across multiple regional databases:
+
+- **Find all users across all regions**: Retrieve all users from the Users collections of all regional databases and consolidate them into a single list.
+- **Find the top N videos across all regions**: Fetch the top N videos by views from the Videos collections of all regional databases.
+- **Find channels with the most videos across regions**: Aggregate the number of videos per channel across the Videos collections of all regional databases and identify channels with the most videos.
+- **Find users who commented on videos in multiple regions**: Identify users who have commented on videos in more than one regional database.
+- **Count the total number of videos across all regions**: Calculate the total number of videos in the Videos collections of all regional databases.
+- **Consolidate video metadata across all regions**: Retrieve video metadata (e.g., video ID, title, views) from the Videos collections of all regional databases and combine them into a unified list.
 
 ---
 
