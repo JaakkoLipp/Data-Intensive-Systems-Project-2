@@ -152,12 +152,12 @@ def consolidate_video_metadata_across_regions():
     return consolidated_metadata
 
 # ---------------------------------
-# TESTING USER INTERFACE
+# CLI DEMO USER INTERFACE
 # ---------------------------------
 
 def testui():
     while True:
-        print("\n\n----- TESTING UI -----\n\n")
+        print("\n\n----- CLI DEMO UI -----\n\n")
         print("Select a query to execute:")
         print("1. Find all users in a specific region")
         print("2. Add a video to a specific region")
